@@ -23,6 +23,12 @@ class Keypairs:
     def get_by_name(name):
         return Keypairs.keypairs[name]
     
+
+    def delete_keypair(connection):
+        print("Deleting keypairs")
+        for name in Keypairs.keypairs.keys():
+            connection.compute.delete_keypair(Keypairs.keypairs[name])
+
     def build_keys_on_stack(connection):
         for keypair in Keypairs.keypairs_definition:
             Keypairs.resolved_keypairs.append(Keypairs(keypair['name']))

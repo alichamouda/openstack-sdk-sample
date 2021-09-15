@@ -64,6 +64,12 @@ class ComputeInstance:
 
             if instance.exposed:
                 connection.compute.add_floating_ip_to_server(server,Network.get_floating_ip().floating_ip_address)
+
+    def delete_servers(connection):
+        print("Deleting Servers")
+        for s_key in ComputeInstance.servers.keys():
+                connection.compute.delete_server(ComputeInstance.servers[s_key])
+
     
     def list_servers(connection):
         return connection.compute.servers()

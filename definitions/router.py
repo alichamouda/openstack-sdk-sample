@@ -33,3 +33,12 @@ class Router:
             for subnet in p_router.subnets:
                 connection.network.add_interface_to_router(router, subnet_id=Network.get_subnet_by_name(subnet["name"]).id)
             Router.routers[router.name]=router
+
+    def delete_routers(connection):
+        print("Deleting Routers")
+        for p_router in Router.prepared_routers:
+            router = Router.routers[p_router.name]
+            for subnet in p_router.subnets:
+                connection.network.remove_interface_from_router(router, subnet_id=Network.get_subnet_by_name(subnet["name"]).id)
+            
+            connection.network.delete_router(router)

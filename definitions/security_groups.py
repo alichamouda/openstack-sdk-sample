@@ -30,9 +30,15 @@ class SecurityGroups:
         for sg in SecurityGroups.sg_definitions:
             SecurityGroups.prepared_sg.append(SecurityGroups(sg["name"],sg["protocol"], sg["port"]))
     
+
+    def delete_security_groups(connection):
+        print("Deleting Servers")
+        for name in SecurityGroups.security_groups.keys():
+            connection.network.delete_security_group(SecurityGroups.security_groups[name])
+
     def create_security_groups(connection):
         SecurityGroups.prepare_security_groups()
-        
+
         for p_sg in SecurityGroups.prepared_sg:
             print("Creating Security Group "+ p_sg.name)
             sg = connection.network.create_security_group(name=p_sg.name)

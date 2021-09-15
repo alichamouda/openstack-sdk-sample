@@ -29,7 +29,23 @@ class Network:
     def get_floating_ip():
         return Network.floating_ip
 
+
+
+    def delete_floating_ip(connection):
+        print("Deleting Floating Ip")
+        connection.network.delete_ip(Network.floating_ip)
+
+
+    def delete_network(connection):
+        print("Deleting Networks")
+        for name in Network.networks.keys():
+            network = Network.networks[name]
+            if (name is not Network.external_network_name):
+                connection.network.delete_network(network)
+
+
     def create_networks(connection):
+
         external_network = connection.network.find_network(Network.external_network_name)
         Network.networks[Network.external_network_name]=external_network
         floatingip = connection.network.create_ip(floating_network_id=external_network.id)
