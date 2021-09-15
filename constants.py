@@ -1,0 +1,3 @@
+PROJECT_NAME=AUTO_DEP
+CLOUD_NAME="openstack"
+KEYPAIR_NAME="demo-keypair"
